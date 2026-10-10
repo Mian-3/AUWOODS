@@ -14,7 +14,6 @@ export default function Header() {
   const barRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Bar hero ke baad slide down hoti hai
   useEffect(() => {
     const bar = barRef.current;
     if (!bar) return;
@@ -32,14 +31,12 @@ export default function Header() {
     return () => trigger.kill();
   }, []);
 
-  // Hero ka mobile "Menu" button yahi menu kholta hai
   useEffect(() => {
     const open = () => setMenuOpen(true);
     window.addEventListener("open-menu", open);
     return () => window.removeEventListener("open-menu", open);
   }, []);
 
-  // Menu open ho to body scroll lock
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -54,8 +51,11 @@ export default function Header() {
         style={{ visibility: "hidden" }}
         className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white"
       >
-        <div className="grid h-16 grid-cols-3 items-center px-5 text-[15px] font-medium md:px-6">
-          <nav aria-label="Primary" className="hidden gap-9 md:flex">
+        <div className="grid h-16 grid-cols-3 items-center px-5 md:px-6">
+          <nav
+            aria-label="Primary"
+            className="hidden gap-9 text-[17px] font-medium leading-none md:flex"
+          >
             {navLinks.map((link) => (
               <NavItem
                 key={link.label}
@@ -67,7 +67,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
-            className="w-fit py-3 text-left md:hidden"
+            className="w-fit py-3 text-left text-[17px] font-medium md:hidden"
           >
             Menu
           </button>
@@ -79,7 +79,10 @@ export default function Header() {
             AU WOODS
           </Link>
 
-          <Link href="#" className="justify-self-end py-3">
+          <Link
+            href="#"
+            className="justify-self-end py-3 text-[17px] font-medium"
+          >
             Cart
           </Link>
         </div>
@@ -92,7 +95,7 @@ export default function Header() {
         }`}
         aria-hidden={!menuOpen}
       >
-        <div className="flex h-16 items-center justify-between text-[15px] font-medium">
+        <div className="flex h-16 items-center justify-between text-[17px] font-medium">
           <button
             type="button"
             onClick={() => setMenuOpen(false)}

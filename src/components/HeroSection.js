@@ -56,7 +56,7 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Scrims: top, bottom aur top-right corner ke liye extra */}
+      {/* Scrims */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-black/60 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/55 to-transparent" />
       <div className="pointer-events-none absolute right-0 top-0 h-80 w-[55vw] bg-[radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.6),transparent_70%)] md:w-[40vw]" />
@@ -85,7 +85,7 @@ export default function HeroSection() {
       <nav
         data-hero-fade
         aria-label="Hero"
-        className="absolute bottom-7 left-6 z-10 hidden gap-9 text-[15px] font-medium [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:flex"
+        className="absolute bottom-7 left-6 z-10 hidden gap-9 text-[17px] font-medium leading-none [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:flex"
       >
         {navLinks.map((link) => (
           <NavItem
@@ -99,7 +99,7 @@ export default function HeroSection() {
         data-hero-fade
         type="button"
         onClick={() => window.dispatchEvent(new Event("open-menu"))}
-        className="absolute bottom-4 left-5 py-3 text-[15px] font-medium [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:hidden"
+        className="absolute bottom-4 left-5 py-3 text-[17px] font-medium [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:hidden"
       >
         Menu
       </button>
