@@ -56,9 +56,10 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Scrims: top aur bottom text ke peeche contrast ke liye */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/55 to-transparent" />
+      {/* Scrims: top, bottom aur top-right corner ke liye extra */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-black/60 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/55 to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 h-80 w-[55vw] bg-[radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.6),transparent_70%)] md:w-[40vw]" />
 
       {/* Top: logo + intro */}
       <div className="absolute inset-x-0 top-0 flex flex-col items-center px-5 pt-10 text-center md:flex-row md:items-start md:justify-between md:px-6 md:pt-5 md:text-left">
@@ -70,7 +71,7 @@ export default function HeroSection() {
         </h1>
         <p
           data-hero-fade
-          className="mt-3 text-[14px] font-medium leading-snug [text-shadow:0_1px_12px_rgba(0,0,0,0.55)] md:mt-2 md:text-right md:text-[15px]"
+          className="mt-3 text-[17px] font-semibold leading-snug [text-shadow:0_1px_14px_rgba(0,0,0,0.7)] md:mt-3 md:text-right md:text-[20px]"
         >
           {heroContent.introLines.map((line) => (
             <span key={line} className="block">
