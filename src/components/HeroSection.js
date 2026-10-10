@@ -55,19 +55,22 @@ export default function HeroSection() {
           className="object-cover"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40" />
+
+      {/* Scrims: top aur bottom text ke peeche contrast ke liye */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/55 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/55 to-transparent" />
 
       {/* Top: logo + intro */}
       <div className="absolute inset-x-0 top-0 flex flex-col items-center px-5 pt-10 text-center md:flex-row md:items-start md:justify-between md:px-6 md:pt-5 md:text-left">
         <h1
           data-hero-fade
-          className="font-serif text-5xl font-normal tracking-tight md:text-6xl"
+          className="font-serif text-5xl font-normal tracking-tight [text-shadow:0_1px_16px_rgba(0,0,0,0.35)] md:text-6xl"
         >
           AU WOODS
         </h1>
         <p
           data-hero-fade
-          className="mt-3 text-[12px] font-medium leading-snug md:mt-2 md:text-right md:text-[11px]"
+          className="mt-3 text-[14px] font-medium leading-snug [text-shadow:0_1px_12px_rgba(0,0,0,0.55)] md:mt-2 md:text-right md:text-[15px]"
         >
           {heroContent.introLines.map((line) => (
             <span key={line} className="block">
@@ -81,13 +84,12 @@ export default function HeroSection() {
       <nav
         data-hero-fade
         aria-label="Hero"
-        className="absolute bottom-6 left-6 z-10 hidden gap-8 text-[12px] font-medium md:flex"
+        className="absolute bottom-7 left-6 z-10 hidden gap-9 text-[15px] font-medium [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:flex"
       >
         {navLinks.map((link) => (
           <NavItem
             key={link.label}
             link={link}
-            direction="up"
             className="transition-opacity hover:opacity-60"
           />
         ))}
@@ -96,7 +98,7 @@ export default function HeroSection() {
         data-hero-fade
         type="button"
         onClick={() => window.dispatchEvent(new Event("open-menu"))}
-        className="absolute bottom-3 left-5 py-3 text-[12px] font-medium md:hidden"
+        className="absolute bottom-4 left-5 py-3 text-[15px] font-medium [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:hidden"
       >
         Menu
       </button>
