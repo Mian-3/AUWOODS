@@ -54,13 +54,12 @@ export default function Header() {
         style={{ visibility: "hidden" }}
         className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white"
       >
-        <div className="grid h-14 grid-cols-3 items-center px-5 text-[12px] font-medium md:px-6">
-          <nav aria-label="Primary" className="hidden gap-8 md:flex">
+        <div className="grid h-16 grid-cols-3 items-center px-5 text-[15px] font-medium md:px-6">
+          <nav aria-label="Primary" className="hidden gap-9 md:flex">
             {navLinks.map((link) => (
               <NavItem
                 key={link.label}
                 link={link}
-                direction="down"
                 className="transition-opacity hover:opacity-60"
               />
             ))}
@@ -75,7 +74,7 @@ export default function Header() {
 
           <Link
             href="/"
-            className="justify-self-center font-serif text-2xl font-normal tracking-tight"
+            className="justify-self-center font-serif text-3xl font-normal tracking-tight"
           >
             AU WOODS
           </Link>
@@ -93,7 +92,7 @@ export default function Header() {
         }`}
         aria-hidden={!menuOpen}
       >
-        <div className="flex h-14 items-center justify-between text-[12px] font-medium">
+        <div className="flex h-16 items-center justify-between text-[15px] font-medium">
           <button
             type="button"
             onClick={() => setMenuOpen(false)}
@@ -110,7 +109,6 @@ export default function Header() {
             <NavItem
               key={link.label}
               link={link}
-              direction="inline"
               onNavigate={() => setMenuOpen(false)}
               className="font-serif text-4xl font-light"
             />
