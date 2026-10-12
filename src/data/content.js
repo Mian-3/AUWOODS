@@ -156,21 +156,19 @@ export const panels = {
 export const collectionContent = {
   title: "Collection",
   items: [
-    { label: "Sofas", href: "#", imageKey: "sofas" },
-    { label: "Beds", href: "#", imageKey: "beds" },
-    { label: "Dining Tables", href: "#", imageKey: "dining" },
-    { label: "Side Tables", href: "#", imageKey: "sideTables" },
-    { label: "Accent Chairs", href: "#", imageKey: "chairs" },
-    { label: "Storage", href: "#", imageKey: "storage" },
-    { label: "Desks", href: "#", imageKey: "desks" },
-    { label: "Accents", href: "#", imageKey: "accents" },
+    { label: "Sofas", href: "/collections/sofas", imageKey: "sofas" },
+    { label: "Beds", href: "/collections/beds", imageKey: "beds" },
+    { label: "Dining Tables", href: "/collections/dining-tables", imageKey: "dining" },
+    { label: "Side Tables", href: "/collections/side-tables", imageKey: "sideTables" },
+    { label: "Accent Chairs", href: "/collections/accent-chairs", imageKey: "chairs" },
+    { label: "Storage", href: "/collections/storage", imageKey: "storage" },
+    { label: "Desks", href: "/collections/desks", imageKey: "desks" },
+    { label: "Accents", href: "/collections/accents", imageKey: "accents" },
   ],
 };
-
 export const bestSellersContent = {
   title: "Best Sellers",
-  cta: { label: "View All", href: "#" },
-  items: [
+  cta: { label: "View All", href: "/collections/all" },  items: [
     { name: "Veloura Sofa", price: 90000, oldPrice: 120000, imageKey: "sofaA", ratio: "aspect-[4/5]" },
     { name: "Ellen TV Table", price: 99000, oldPrice: 117000, imageKey: "tvTable", ratio: "aspect-[1/1]" },
     { name: "Arch Chair", price: 84000, oldPrice: 102000, imageKey: "chair", ratio: "aspect-[4/3]" },

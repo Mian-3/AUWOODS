@@ -17,10 +17,18 @@ export default function Header() {
   useEffect(() => {
     const bar = barRef.current;
     if (!bar) return;
+
+    // Jin pages par hero nahi (collections), bar hamesha visible
+    const hero = document.getElementById("hero");
+    if (!hero) {
+      gsap.set(bar, { yPercent: 0, autoAlpha: 1 });
+      return;
+    }
+
     gsap.set(bar, { yPercent: -100, autoAlpha: 1 });
 
     const trigger = ScrollTrigger.create({
-      trigger: "#hero",
+      trigger: hero,
       start: "bottom top+=64",
       onEnter: () =>
         gsap.to(bar, { yPercent: 0, duration: 0.5, ease: "power3.out" }),

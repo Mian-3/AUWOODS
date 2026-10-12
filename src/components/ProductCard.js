@@ -8,23 +8,35 @@ import { images } from "@/data/images";
 
 const fmt = (n) => `Rs ${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 
-export default function ProductCard({ item }) {
+export default function ProductCard({ item, variant = "masonry" }) {
   const [liked, setLiked] = useState(false);
 
   const save = item.oldPrice - item.price;
   const percent = Math.round((save / item.oldPrice) * 100);
+  const src = item.image ?? images.bestSellers[item.imageKey];
+  const ratio = item.ratio ?? "aspect-[4/5]";
+
+  // masonry: height slide. grid: opacity fade (row height na badle)
+  const actionsWrap =
+    variant === "grid"
+      ? "grid grid-rows-[1fr] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100"
+      : "grid grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr]";
 
   return (
     <article className="group break-inside-avoid pb-6 md:pb-8">
       <div
-        className={`relative w-full overflow-hidden rounded-md bg-[#f3efea] ${item.ratio}`}
+        className={`relative w-full overflow-hidden rounded-md bg-[#f3efea] ${ratio}`}
       >
-        <Link href="#" aria-label={item.name} className="absolute inset-0">
+        <Link
+          href={item.href ?? "#"}
+          aria-label={item.name}
+          className="absolute inset-0"
+        >
           <Image
-            src={images.bestSellers[item.imageKey]}
+            src={src}
             alt={item.name}
             fill
-            sizes="(min-width: 1100px) 340px, (min-width: 768px) 30vw, 46vw"
+            sizes="(min-width: 1280px) 300px, (min-width: 768px) 30vw, 46vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         </Link>
@@ -64,8 +76,7 @@ export default function ProductCard({ item }) {
           </span>
         </div>
 
-        {/* Hover par slide: mobile par hamesha visible */}
-        <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr]">
+        <div className={actionsWrap}>
           <div className="overflow-hidden">
             <div className="flex items-center gap-2 pt-3">
               <button
