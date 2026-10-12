@@ -2,7 +2,9 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import IntroSection from "@/components/IntroSection";
 import CategoryGrid from "@/components/CategoryGrid";
+import CollectionSection from "@/components/CollectionSection";
 import ServiceSlider from "@/components/ServiceSlider";
+import BestSellers from "@/components/BestSellers";
 import FlagshipSection from "@/components/FlagshipSection";
 import EditsSection from "@/components/EditsSection";
 import Footer from "@/components/Footer";
@@ -16,9 +18,11 @@ export default function Home() {
       <main>
         <HeroSection />
         <IntroSection />
-        <CategoryGrid />
-        <ServiceSlider />
-        <FlagshipSection />
+       <CategoryGrid />
+<CollectionSection />
+<ServiceSlider />
+<BestSellers />
+<FlagshipSection />
         <EditsSection />
       </main>
       <Footer />

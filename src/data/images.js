@@ -27,4 +27,25 @@ export const images = {
     dining: u("1505409628601-edc9af17fda6", 2200), // wooden dining set
     arrivals: u("1605702098590-d552a98dc93d", 2200), // wooden armchair
   },
+    collection: {
+    sofas: u("1567016376408-0226e4d0c1ea", 900),
+    beds: u("1560185128-e173042f79dd", 900),
+    dining: u("1505409628601-edc9af17fda6", 900),
+    sideTables: u("1714926340157-dd3a67e7b2c4", 900),
+    chairs: u("1493663284031-b7e3aefcae8e", 900),
+    storage: u("1757344454333-cc666252e596", 900),
+    desks: u("1581428982868-e410dd047a90", 900),
+    accents: u("1605702098590-d552a98dc93d", 900),
+  },
+    bestSellers: {
+    sofaA: u("1567016376408-0226e4d0c1ea", 1000),
+    tvTable: u("1714926340157-dd3a67e7b2c4", 1000),
+    chair: u("1493663284031-b7e3aefcae8e", 1000),
+    sofaB: u("1617364852223-75f57e78dc96", 1000),
+    coffeeTable: u("1581428982868-e410dd047a90", 1000),
+    dining: u("1505409628601-edc9af17fda6", 1000),
+    bed: u("1560185128-e173042f79dd", 1000),
+    storage: u("1757344454333-cc666252e596", 1000),
+    accent: u("1605702098590-d552a98dc93d", 1000),
+  },
 };

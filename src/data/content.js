@@ -151,4 +151,34 @@ export const panels = {
       },
     ],
   },
+  
+};
+export const collectionContent = {
+  title: "Collection",
+  items: [
+    { label: "Sofas", href: "#", imageKey: "sofas" },
+    { label: "Beds", href: "#", imageKey: "beds" },
+    { label: "Dining Tables", href: "#", imageKey: "dining" },
+    { label: "Side Tables", href: "#", imageKey: "sideTables" },
+    { label: "Accent Chairs", href: "#", imageKey: "chairs" },
+    { label: "Storage", href: "#", imageKey: "storage" },
+    { label: "Desks", href: "#", imageKey: "desks" },
+    { label: "Accents", href: "#", imageKey: "accents" },
+  ],
+};
+
+export const bestSellersContent = {
+  title: "Best Sellers",
+  cta: { label: "View All", href: "#" },
+  items: [
+    { name: "Veloura Sofa", price: 90000, oldPrice: 120000, imageKey: "sofaA", ratio: "aspect-[4/5]" },
+    { name: "Ellen TV Table", price: 99000, oldPrice: 117000, imageKey: "tvTable", ratio: "aspect-[1/1]" },
+    { name: "Arch Chair", price: 84000, oldPrice: 102000, imageKey: "chair", ratio: "aspect-[4/3]" },
+    { name: "Ovarine Sofa Set", price: 144000, oldPrice: 180000, imageKey: "sofaB", ratio: "aspect-[4/3]" },
+    { name: "Arc & Orb", price: 66000, oldPrice: 78000, imageKey: "coffeeTable", ratio: "aspect-[1/1]" },
+    { name: "Verano Loom Dining Set", price: 216000, oldPrice: 240000, imageKey: "dining", ratio: "aspect-[4/5]" },
+    { name: "Stoic Slumber Bed", price: 228000, oldPrice: 252000, imageKey: "bed", ratio: "aspect-[4/3]" },
+    { name: "Crescent Cabinet", price: 66000, oldPrice: 78000, imageKey: "storage", ratio: "aspect-[1/1]" },
+    { name: "Caldera Accent Chair", price: 80000, oldPrice: 90000, imageKey: "accent", ratio: "aspect-[4/5]" },
+  ],
 };
