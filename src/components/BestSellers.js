@@ -20,7 +20,7 @@ export default function BestSellers() {
         </div>
 
         {/* Masonry: CSS columns */}
-        <div className="columns-2 gap-4 md:columns-3 md:gap-6">
+      <div className="columns-2 gap-3 md:columns-3 md:gap-6">
           {bestSellersContent.items.map((item) => (
             <ProductCard key={item.name} item={item} />
           ))}

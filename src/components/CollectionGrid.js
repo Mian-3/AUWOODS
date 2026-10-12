@@ -52,7 +52,7 @@ export default function CollectionGrid({ products }) {
         </label>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-4 gap-y-2 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4">
+     <div className="grid grid-cols-2 gap-x-3 gap-y-2 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4">
         {shown.map((item) => (
           <ProductCard key={item.id} item={item} variant="grid" />
         ))}
