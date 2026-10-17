@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { X } from "lucide-react";
 import { navLinks } from "@/data/content";
 import NavItem from "@/components/NavItem";
+import Logo from "@/components/Logo";
+import ContactInfo from "@/components/ContactInfo";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,9 +84,13 @@ export default function Header() {
 
           <Link
             href="/"
-            className="justify-self-center font-serif text-3xl font-normal tracking-tight"
+            aria-label="AU WOODS home"
+            className="flex items-center gap-2.5 justify-self-center"
           >
-            AU WOODS
+            <Logo className="h-8 md:h-9" />
+            <span className="font-serif text-2xl font-normal tracking-tight md:text-3xl">
+              AU WOODS
+            </span>
           </Link>
 
           <Link
@@ -98,33 +104,52 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-[60] overflow-y-auto bg-white px-5 transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-[60] overflow-y-auto bg-white transition-opacity duration-300 md:hidden ${
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         aria-hidden={!menuOpen}
       >
-        <div className="flex h-16 items-center justify-between text-[17px] font-medium">
-          <button
-            type="button"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-2 py-3"
-          >
-            <X size={16} /> Close
-          </button>
-          <Link href="#" className="py-3">
-            Cart
-          </Link>
-        </div>
-        <nav className="mt-10 flex flex-col items-start gap-6 pb-10">
-          {navLinks.map((link) => (
-            <NavItem
-              key={link.label}
-              link={link}
-              onNavigate={() => setMenuOpen(false)}
-              className="font-serif text-4xl font-light"
+        <div className="flex min-h-full flex-col px-5">
+          <div className="grid h-16 shrink-0 grid-cols-3 items-center text-[17px] font-medium">
+            <button
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              className="flex w-fit items-center gap-2 py-3"
+            >
+              <X size={16} /> Close
+            </button>
+            <Link
+              href="/"
+              aria-label="AU WOODS home"
+              onClick={() => setMenuOpen(false)}
+              className="justify-self-center"
+            >
+              <Logo className="h-9" />
+            </Link>
+            <Link href="#" className="justify-self-end py-3">
+              Cart
+            </Link>
+          </div>
+
+          <nav className="mt-10 flex flex-col items-start gap-6 pb-10">
+            {navLinks.map((link) => (
+              <NavItem
+                key={link.label}
+                link={link}
+                onNavigate={() => setMenuOpen(false)}
+                className="font-serif text-4xl font-light"
+              />
+            ))}
+          </nav>
+
+          {/* Contact: hamesha neeche pinned */}
+          <div className="mt-auto border-t border-black/10 pb-8 pt-5">
+            <ContactInfo
+              className="flex flex-col"
+              linkClassName="py-2 text-[15px]"
             />
-          ))}
-        </nav>
+          </div>
+        </div>
       </div>
     </>
   );

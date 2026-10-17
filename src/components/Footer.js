@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Logo from "@/components/Logo";
 import FooterColumn from "@/components/FooterColumn";
 import RegisterForm from "@/components/RegisterForm";
 import { footerColumns } from "@/data/content";
@@ -23,14 +25,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Monogram placeholder: apna logo/monogram baad me yahan lagana */}
       <div className="mt-20 flex justify-center border-b border-foreground pb-10 md:mt-28 md:border-0 md:pb-0">
-        <span
-          aria-label="AU WOODS monogram"
-          className="font-serif text-5xl italic font-light tracking-tight"
-        >
-          AW
-        </span>
+        <Link href="/" aria-label="AU WOODS home">
+          <Logo alt="AU WOODS" className="h-20 md:h-24" />
+        </Link>
       </div>
     </footer>
   );

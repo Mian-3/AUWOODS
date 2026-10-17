@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { images } from "@/data/images";
 import { navLinks, heroContent } from "@/data/content";
 import NavItem from "@/components/NavItem";
+import Logo from "@/components/Logo";
 
 export default function HeroSection() {
   const root = useRef(null);
@@ -65,8 +66,13 @@ export default function HeroSection() {
       <div className="absolute inset-x-0 top-0 flex flex-col items-center px-5 pt-10 text-center md:flex-row md:items-start md:justify-between md:px-6 md:pt-5 md:text-left">
         <h1
           data-hero-fade
-          className="font-serif text-5xl font-normal tracking-tight [text-shadow:0_1px_16px_rgba(0,0,0,0.35)] md:text-6xl"
+          className="flex items-center gap-3 font-serif text-5xl font-normal tracking-tight [text-shadow:0_1px_16px_rgba(0,0,0,0.35)] md:gap-4 md:text-6xl"
         >
+          <Logo
+            variant="white"
+            priority
+            className="h-10 drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)] md:h-14"
+          />
           AU WOODS
         </h1>
         <p

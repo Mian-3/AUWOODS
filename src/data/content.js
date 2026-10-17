@@ -180,3 +180,10 @@ export const bestSellersContent = {
     { name: "Caldera Accent Chair", price: 80000, oldPrice: 90000, imageKey: "accent", ratio: "aspect-[4/5]" },
   ],
 };
+
+export const siteInfo = {
+  name: "AU WOODS",
+  email: "infoauwoods@gmail.com",
+  phone: "0309 4666939",
+  phoneHref: "tel:+923094666939",
+};

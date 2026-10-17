@@ -5,6 +5,8 @@ import Link from "next/link";
 import gsap from "gsap";
 import { X } from "lucide-react";
 import { navLinks, panels } from "@/data/content";
+import Logo from "@/components/Logo";
+import ContactInfo from "@/components/ContactInfo";
 
 export default function ShopMenu() {
   const [open, setOpen] = useState(false);
@@ -187,108 +189,131 @@ export default function ShopMenu() {
       <aside
         ref={panelRef}
         tabIndex={-1}
-        className="absolute inset-y-0 left-0 w-full bg-white outline-none md:w-[40vw] md:min-w-[560px] md:max-w-[780px]"
+        className="absolute inset-y-0 left-0 flex w-full flex-col bg-white outline-none md:w-[40vw] md:min-w-[560px] md:max-w-[780px]"
       >
-        {/* Mobile close */}
-        <button
-          type="button"
-          onClick={close}
-          aria-label="Close menu"
-          className="absolute right-4 top-4 z-10 p-2 md:hidden"
-        >
-          <X size={20} strokeWidth={1.25} />
-        </button>
+        {/* Top: logo + mobile close */}
+        <div className="flex shrink-0 items-center justify-between px-5 pb-1 pt-5 md:px-10 md:pt-7">
+          <Link
+            href="/"
+            onClick={close}
+            aria-label="AU WOODS home"
+            className="flex items-center gap-2.5"
+          >
+            <Logo className="h-9 md:h-10" />
+            <span className="font-serif text-2xl tracking-tight md:text-3xl">
+              AU WOODS
+            </span>
+          </Link>
+          <button
+            type="button"
+            onClick={close}
+            aria-label="Close menu"
+            className="-mr-2 p-2 md:hidden"
+          >
+            <X size={20} strokeWidth={1.25} />
+          </button>
+        </div>
 
         {/* Scroll area (native scrollbar hidden) */}
-        <div
-          ref={scrollRef}
-          className="no-scrollbar panel-list h-full overflow-y-auto overscroll-contain px-5 pb-36 pt-16 md:px-10 md:pt-14"
-        >
-          <div className="flex flex-col gap-10 md:gap-[44px]">
-            {sections.map((section) => (
-              <div
-                key={`${key}-${section.title}`}
-                data-panel-item
-                className="grid grid-cols-[7rem_1fr] md:grid-cols-[9.3rem_1fr]"
-              >
-                <h3 className="py-[5px] text-[15px] font-medium uppercase leading-[22px] md:text-[16px]">
-                  {section.title}
-                </h3>
-
-                <div className="grid grid-cols-1 gap-x-6 md:grid-cols-2">
-                  {section.columns.map((col, ci) => (
-                    <ul key={ci}>
-                      {col.map((item, ii) => (
-                        <li key={item.label}>
-                          <Link
-                            href={item.href}
-                            onClick={close}
-                            className={`panel-link block py-[5px] text-[15px] leading-[22px] md:text-[16px] ${
-                              section.emphasizeFirst && ci === 0 && ii === 0
-                                ? "font-medium"
-                                : ""
-                            }`}
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Custom scroll line */}
-        <div
-          ref={trackRef}
-          aria-hidden
-          className="pointer-events-none absolute bottom-28 right-2 top-10 w-[2px] rounded-full bg-black/5"
-        >
+        <div className="relative min-h-0 flex-1">
           <div
-            ref={thumbRef}
-            className="w-full rounded-full bg-black/35 opacity-0 transition-opacity duration-300"
-          />
+            ref={scrollRef}
+            className="no-scrollbar panel-list h-full overflow-y-auto overscroll-contain px-5 pb-12 pt-8 md:px-10 md:pt-10"
+          >
+            <div className="flex flex-col gap-10 md:gap-[44px]">
+              {sections.map((section) => (
+                <div
+                  key={`${key}-${section.title}`}
+                  data-panel-item
+                  className="grid grid-cols-[7rem_1fr] md:grid-cols-[9.3rem_1fr]"
+                >
+                  <h3 className="py-[5px] text-[15px] font-medium uppercase leading-[22px] md:text-[16px]">
+                    {section.title}
+                  </h3>
+
+                  <div className="grid grid-cols-1 gap-x-6 md:grid-cols-2">
+                    {section.columns.map((col, ci) => (
+                      <ul key={ci}>
+                        {col.map((item, ii) => (
+                          <li key={item.label}>
+                            <Link
+                              href={item.href}
+                              onClick={close}
+                              className={`panel-link block py-[5px] text-[15px] leading-[22px] md:text-[16px] ${
+                                section.emphasizeFirst && ci === 0 && ii === 0
+                                  ? "font-medium"
+                                  : ""
+                              }`}
+                            >
+                              {item.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Custom scroll line */}
+          <div
+            ref={trackRef}
+            aria-hidden
+            className="pointer-events-none absolute inset-y-2 right-2 w-[2px] rounded-full bg-black/5"
+          >
+            <div
+              ref={thumbRef}
+              className="w-full rounded-full bg-black/35 opacity-0 transition-opacity duration-300"
+            />
+          </div>
+
+          {/* Bottom fade */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white to-transparent" />
         </div>
 
-        {/* Bottom fade + pinned nav */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-[76px] h-14 bg-gradient-to-t from-white to-transparent" />
-        <nav
-          aria-label="Menu"
-          className="absolute inset-x-0 bottom-0 z-10 flex flex-wrap gap-x-8 gap-y-2 bg-white px-5 pb-7 pt-5 text-[15px] font-medium md:px-10 md:text-[16px]"
-        >
-          {navLinks.map((link) =>
-            link.menu ? (
-              <button
-                key={link.label}
-                type="button"
-                onClick={() =>
-                  window.dispatchEvent(
-                    new CustomEvent("toggle-panel", { detail: link.menu })
-                  )
-                }
-                className={`border-b pb-0.5 transition-opacity hover:opacity-60 ${
-                  link.menu === key
-                    ? "border-foreground"
-                    : "border-transparent"
-                }`}
-              >
-                {link.label}
-              </button>
-            ) : (
-              <Link
-                key={link.label}
-                href={link.href}
-                onClick={close}
-                className="border-b border-transparent pb-0.5 transition-opacity hover:opacity-60"
-              >
-                {link.label}
-              </Link>
-            )
-          )}
-        </nav>
+        {/* Pinned footer: contact + nav */}
+        <div className="shrink-0 border-t border-black/10 bg-white px-5 pb-6 pt-3 md:px-10 md:pb-7">
+          <ContactInfo
+            className="flex flex-wrap gap-x-7"
+            linkClassName="py-1.5 text-[14px] md:text-[15px]"
+          />
+          <nav
+            aria-label="Menu"
+            className="mt-2 flex flex-wrap gap-x-8 gap-y-2 text-[15px] font-medium md:text-[16px]"
+          >
+            {navLinks.map((link) =>
+              link.menu ? (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() =>
+                    window.dispatchEvent(
+                      new CustomEvent("toggle-panel", { detail: link.menu })
+                    )
+                  }
+                  className={`border-b pb-0.5 transition-opacity hover:opacity-60 ${
+                    link.menu === key
+                      ? "border-foreground"
+                      : "border-transparent"
+                  }`}
+                >
+                  {link.label}
+                </button>
+              ) : (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={close}
+                  className="border-b border-transparent pb-0.5 transition-opacity hover:opacity-60"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
+          </nav>
+        </div>
       </aside>
     </div>
   );
