@@ -87,10 +87,10 @@ export default function Header() {
             aria-label="AU WOODS home"
             className="flex items-center gap-2.5 justify-self-center"
           >
-            <Logo className="h-8 md:h-9" />
-            <span className="font-serif text-2xl font-normal tracking-tight md:text-3xl">
-              AU WOODS
-            </span>
+           <Logo className="h-10 md:h-9" />
+<span className="hidden font-serif text-3xl font-normal tracking-tight md:inline">
+  AU WOODS
+</span>
           </Link>
 
           <Link
