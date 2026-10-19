@@ -9,12 +9,15 @@ import { navLinks } from "@/data/content";
 import NavItem from "@/components/NavItem";
 import Logo from "@/components/Logo";
 import ContactInfo from "@/components/ContactInfo";
+import CartDrawer from "@/components/CartDrawer";
+import { openCart, useCart } from "@/lib/cart";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
   const barRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { count } = useCart();
 
   useEffect(() => {
     const bar = barRef.current;
@@ -93,12 +96,17 @@ export default function Header() {
             </span>
           </Link>
 
-          <Link
-            href="#"
-            className="-mr-2 flex min-h-11 items-center justify-self-end px-2 text-[17px] font-medium"
+          <button
+            type="button"
+            onClick={openCart}
+            aria-label={`Cart, ${count} items`}
+            className="-mr-2 flex min-h-11 items-center gap-1.5 justify-self-end px-2 text-[17px] font-medium"
           >
             Cart
-          </Link>
+            <span className="min-w-[1.25rem] rounded-full bg-[var(--wood)] px-1.5 py-[3px] text-center text-[11px] leading-none text-white">
+              {count}
+            </span>
+          </button>
         </div>
       </header>
 
@@ -126,9 +134,19 @@ export default function Header() {
             >
               <Logo className="h-9" />
             </Link>
-            <Link href="#" className="-mr-2 flex min-h-11 items-center justify-self-end px-2">
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                openCart();
+              }}
+              className="-mr-2 flex min-h-11 items-center gap-1.5 justify-self-end px-2"
+            >
               Cart
-            </Link>
+              <span className="min-w-[1.25rem] rounded-full bg-[var(--wood)] px-1.5 py-[3px] text-center text-[11px] leading-none text-white">
+                {count}
+              </span>
+            </button>
           </div>
 
           <nav className="mt-10 flex flex-col items-start gap-6 pb-10">
@@ -151,6 +169,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+      <CartDrawer />
     </>
   );
 }

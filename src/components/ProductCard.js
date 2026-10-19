@@ -1,50 +1,76 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, Search, ShoppingBag } from "lucide-react";
-import { images } from "@/data/images";
-
-const fmt = (n) => `Rs ${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+import { Check, Heart, ShoppingBag, Star } from "lucide-react";
+import { addItem } from "@/lib/cart";
+import { discountPercent, formatPrice } from "@/lib/format";
 
 export default function ProductCard({ item, variant = "masonry" }) {
   const [liked, setLiked] = useState(false);
+  const [added, setAdded] = useState(false);
+  const timer = useRef(null);
 
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const percent = discountPercent(item.price, item.oldPrice);
   const save = item.oldPrice - item.price;
-  const percent = Math.round((save / item.oldPrice) * 100);
-  const src = item.image ?? images.bestSellers[item.imageKey];
   const ratio = item.ratio ?? "aspect-[4/5]";
+  const href = item.href ?? `/products/${item.slug}`;
+  const defaultSize = item.sizes?.find((s) => s.mult === 1) ?? item.sizes?.[0];
 
-  // Mobile aur touch devices: actions hamesha visible.
-  // Desktop (hover wale): masonry me height slide, grid me opacity fade.
+  const handleAdd = () => {
+    addItem(item, {
+      finish: item.finishes?.[0]?.name,
+      size: defaultSize?.label,
+      price: item.price,
+    });
+    setAdded(true);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setAdded(false), 1800);
+  };
+
+  // Touch par actions hamesha visible. Desktop: masonry me height slide, grid me fade.
   const actionsWrap =
     variant === "grid"
-      ? "grid grid-rows-[1fr] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 [@media(hover:none)]:opacity-100"
-      : "grid grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] [@media(hover:none)]:grid-rows-[1fr]";
+      ? "grid grid-rows-[1fr] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100 [@media(hover:none)]:opacity-100"
+      : "grid grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] md:group-focus-within:grid-rows-[1fr] [@media(hover:none)]:grid-rows-[1fr]";
 
   return (
     <article className="group break-inside-avoid pb-6 md:pb-8">
-      <div
-        className={`relative w-full overflow-hidden rounded-md bg-[#f3efea] ${ratio}`}
-      >
-        <Link
-          href={item.href ?? "#"}
-          aria-label={item.name}
-          className="absolute inset-0"
-        >
+      <div className={`relative w-full overflow-hidden rounded-md bg-[#f3efea] ${ratio}`}>
+        <Link href={href} aria-label={item.name} className="absolute inset-0">
           <Image
-            src={src}
+            src={item.image}
             alt={item.name}
             fill
             sizes="(min-width: 1280px) 300px, (min-width: 768px) 30vw, 46vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
+          {item.hoverImage && (
+            <Image
+              src={item.hoverImage}
+              alt=""
+              fill
+              sizes="(min-width: 1280px) 300px, (min-width: 768px) 30vw, 46vw"
+              className="object-cover opacity-0 transition-opacity duration-500 [@media(hover:hover)]:group-hover:opacity-100"
+            />
+          )}
         </Link>
 
-        <span className="absolute left-2 top-2 rounded-full bg-[var(--wood)] px-2 py-[5px] text-[11px] font-medium leading-none text-white md:left-2.5 md:top-2.5 md:px-2.5 md:py-1 md:text-[11px]">
-          -{percent}%
-        </span>
+        <div className="pointer-events-none absolute left-2 top-2 flex flex-col items-start gap-1 md:left-2.5 md:top-2.5">
+          {percent > 0 && (
+            <span className="rounded-full bg-[var(--wood)] px-2 py-[5px] text-[11px] font-medium leading-none text-white md:px-2.5 md:py-1">
+              -{percent}%
+            </span>
+          )}
+          {item.badge && (
+            <span className="rounded-full bg-white/90 px-2 py-[5px] text-[10px] font-medium uppercase leading-none tracking-[0.08em] backdrop-blur md:px-2.5 md:py-1">
+              {item.badge}
+            </span>
+          )}
+        </div>
 
         <button
           type="button"
@@ -64,46 +90,69 @@ export default function ProductCard({ item, variant = "masonry" }) {
       </div>
 
       <div className="pt-3">
-        <h3 className="line-clamp-2 text-[13px] font-medium leading-snug md:text-[15px]">
-          {item.name}
-        </h3>
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="line-clamp-2 text-[13px] font-medium leading-snug md:text-[15px]">
+            <Link href={href} className="hover:opacity-70">
+              {item.name}
+            </Link>
+          </h3>
+          {item.rating && (
+            <span className="mt-0.5 hidden shrink-0 items-center gap-1 text-[12px] text-[var(--muted)] sm:flex">
+              <Star size={12} className="fill-[var(--wood)] text-[var(--wood)]" />
+              {item.rating}
+            </span>
+          )}
+        </div>
+
+        {item.finishes?.length > 0 && (
+          <div className="mt-2 flex items-center gap-1.5" aria-label="Available finishes">
+            {item.finishes.map((f) => (
+              <span
+                key={f.name}
+                title={f.name}
+                style={{ backgroundColor: f.color }}
+                className="h-3 w-3 rounded-full ring-1 ring-black/10"
+              />
+            ))}
+          </div>
+        )}
 
         <div className="mt-1.5 flex flex-col gap-0.5 md:flex-row md:items-baseline md:justify-between md:gap-3">
           <p className="flex flex-wrap items-baseline gap-x-2 text-[13px]">
-            <span className="order-1 font-medium md:order-2">
-              {fmt(item.price)}
-            </span>
-            <span className="order-2 text-[12px] text-[var(--muted)] line-through md:order-1 md:text-[13px]">
-              {fmt(item.oldPrice)}
-            </span>
+            <span className="order-1 font-medium md:order-2">{formatPrice(item.price)}</span>
+            {save > 0 && (
+              <span className="order-2 text-[12px] text-[var(--muted)] line-through md:order-1 md:text-[13px]">
+                {formatPrice(item.oldPrice)}
+              </span>
+            )}
           </p>
-          <span className="text-[11px] font-medium text-[#8c2f23] md:text-[12px]">
-            Save {fmt(save).replace("Rs ", "Rs.")}
-          </span>
+          {save > 0 && (
+            <span className="text-[11px] font-medium text-[#8c2f23] md:text-[12px]">
+              Save {formatPrice(save).replace("Rs ", "Rs.")}
+            </span>
+          )}
         </div>
 
         <div className={actionsWrap}>
           <div className="overflow-hidden">
-            <div className="flex items-center gap-2 pt-3">
+            <div className="pt-3">
               <button
                 type="button"
-                className="group/btn relative h-9 flex-1 rounded-full bg-[var(--wood)] text-[12px] font-medium text-white transition-colors hover:bg-black"
+                onClick={handleAdd}
+                aria-live="polite"
+                className={`flex h-10 w-full items-center justify-center gap-2 rounded-full text-[12px] font-medium text-white transition-colors md:text-[13px] ${
+                  added ? "bg-[#2f5d3a]" : "bg-[var(--wood)] hover:bg-black"
+                }`}
               >
-                <span className="transition-opacity duration-200 group-hover/btn:opacity-0">
-                  Select options
-                </span>
-                <ShoppingBag
-                  size={16}
-                  strokeWidth={1.5}
-                  className="absolute inset-0 m-auto opacity-0 transition-opacity duration-200 group-hover/btn:opacity-100"
-                />
-              </button>
-              <button
-                type="button"
-                aria-label={`Quick view ${item.name}`}
-                className="hidden h-9 w-9 place-items-center rounded-full transition-colors hover:bg-black/5 md:grid"
-              >
-                <Search size={16} strokeWidth={1.5} />
+                {added ? (
+                  <>
+                    <Check size={15} strokeWidth={1.75} /> Added
+                  </>
+                ) : (
+                  <>
+                    <ShoppingBag size={15} strokeWidth={1.5} /> Add to cart
+                  </>
+                )}
               </button>
             </div>
           </div>

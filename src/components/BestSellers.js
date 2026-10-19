@@ -1,8 +1,10 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { bestSellersContent } from "@/data/content";
+import { getBestSellers } from "@/data/products";
 
 export default function BestSellers() {
+  const items = getBestSellers();
   return (
     <section
       aria-labelledby="best-sellers-title"
@@ -21,8 +23,8 @@ export default function BestSellers() {
 
         {/* Masonry: CSS columns */}
       <div className="columns-2 gap-3 md:columns-3 md:gap-6">
-          {bestSellersContent.items.map((item) => (
-            <ProductCard key={item.name} item={item} />
+          {items.map((item) => (
+            <ProductCard key={item.slug} item={item} />
           ))}
         </div>
 
