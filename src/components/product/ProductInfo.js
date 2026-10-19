@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Check, Minus, Plus, Phone, ShieldCheck, ShoppingBag, Star, Truck, Hammer } from "lucide-react";
+import { Check, MessageCircle, Minus, Plus, ShieldCheck, ShoppingBag, Star, Truck, Hammer } from "lucide-react";
 import { addItem } from "@/lib/cart";
 import { discountPercent, formatPrice } from "@/lib/format";
-import { siteInfo } from "@/data/content";
+import { productOrderLink } from "@/lib/whatsapp";
 
 function Accordion({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -207,10 +207,12 @@ export default function ProductInfo({ product }) {
       </div>
 
       <a
-        href={siteInfo.phoneHref}
-        className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-full border border-black/15 text-[14px] transition-colors hover:border-black"
+        href={productOrderLink({ product, finish: finish.name, size: size.label, qty, price })}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#1f8f4e] text-[14px] font-medium text-[#1f6f40] transition-colors hover:bg-[#1f8f4e] hover:text-white"
       >
-        <Phone size={15} strokeWidth={1.5} /> Talk to a specialist, {siteInfo.phone}
+        <MessageCircle size={16} strokeWidth={1.5} /> Order on WhatsApp
       </a>
 
       {/* Trust row */}

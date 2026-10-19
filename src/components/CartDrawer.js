@@ -3,10 +3,10 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, ShoppingBag, X } from "lucide-react";
+import { MessageCircle, Minus, Plus, ShoppingBag, X } from "lucide-react";
 import { closeCart, removeItem, setQty, useCart } from "@/lib/cart";
 import { formatPrice } from "@/lib/format";
-import { siteInfo } from "@/data/content";
+import { cartOrderLink } from "@/lib/whatsapp";
 
 export default function CartDrawer() {
   const { items, open, count, subtotal } = useCart();
@@ -25,7 +25,7 @@ export default function CartDrawer() {
     };
   }, [open]);
 
-  // Checkout abhi nahi: order phone se confirm hota hai
+  // Checkout abhi nahi: order WhatsApp par message ban kar jata hai
   return (
     <div
       role="dialog"
@@ -156,10 +156,12 @@ export default function CartDrawer() {
                 Delivery and installation are arranged by our team after you order.
               </p>
               <a
-                href={siteInfo.phoneHref}
-                className="mt-4 flex h-12 w-full items-center justify-center rounded-full bg-[var(--wood)] text-[14px] font-medium text-white transition-colors hover:bg-black"
+                href={cartOrderLink(items, subtotal)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#1f8f4e] text-[14px] font-medium text-white transition-colors hover:bg-[#177a40]"
               >
-                Order by phone, {siteInfo.phone}
+                <MessageCircle size={17} strokeWidth={1.5} /> Order on WhatsApp
               </a>
               <button
                 type="button"
