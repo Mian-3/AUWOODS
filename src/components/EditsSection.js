@@ -26,7 +26,7 @@ export default function EditsSection() {
     const mm = gsap.matchMedia();
 
     mm.add(
-      "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+      "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
       () => {
         const distance = () =>
           stageEl.offsetHeight - list.offsetTop - list.offsetHeight - 40;
@@ -78,13 +78,13 @@ export default function EditsSection() {
   }, [active]);
 
   return (
-    <section ref={track} aria-label="Edits" className="relative md:h-[170svh]">
+    <section ref={track} aria-label="Edits" className="relative lg:h-[170svh]">
       <div
         ref={stage}
-        className="grid grid-cols-1 md:sticky md:top-0 md:h-[100svh] md:min-h-[600px] md:grid-cols-[30fr_70fr]"
+        className="grid grid-cols-1 lg:sticky lg:top-0 lg:h-[100svh] lg:min-h-[600px] lg:grid-cols-[30fr_70fr]"
       >
         {/* Images (stacked, crossfade) */}
-        <div className="relative order-1 aspect-[4/3] overflow-hidden bg-neutral-200 md:order-2 md:aspect-auto">
+        <div className="relative order-1 aspect-[4/3] overflow-hidden bg-neutral-200 lg:order-2 lg:aspect-auto">
           {edits.map((item, i) => (
             <div
               key={item.id}
@@ -98,7 +98,7 @@ export default function EditsSection() {
                 src={images.edits[item.imageKey]}
                 alt={item.title}
                 fill
-                sizes="(min-width: 768px) 70vw, 100vw"
+                sizes="(min-width: 1024px) 70vw, 100vw"
                 className="object-cover"
               />
             </div>
@@ -106,14 +106,14 @@ export default function EditsSection() {
         </div>
 
         {/* Label + list */}
-        <div className="relative order-2 px-5 py-8 md:order-1 md:px-[30px] md:py-0 md:pt-[24vh]">
-          <h2 className="text-[18px] font-light text-neutral-600 md:text-[22px]">
+        <div className="relative order-2 px-5 py-8 md:px-8 lg:order-1 lg:px-[30px] lg:py-0 lg:pt-[24vh]">
+          <h2 className="text-[18px] font-light text-neutral-600 lg:text-[22px]">
             Edits
           </h2>
 
           <ul
             ref={listRef}
-            className="mt-8 flex flex-col gap-4 md:mt-14 md:gap-6"
+            className="mt-6 flex flex-col gap-1 lg:mt-14 lg:gap-6"
           >
             {edits.map((item, i) => {
               const isActive = i === active;
@@ -124,7 +124,7 @@ export default function EditsSection() {
                     onClick={() => setActive(i)}
                     onFocus={() => setActive(i)}
                     aria-current={isActive}
-                    className="group relative grid w-full grid-cols-[2.5rem_1fr] items-baseline text-left text-[15px] md:text-[17px]"
+                    className="group relative grid min-h-11 w-full grid-cols-[2.5rem_1fr] items-baseline py-2 text-left text-[15px] lg:min-h-0 lg:py-0 lg:text-[17px] lg:after:absolute lg:after:inset-x-0 lg:after:-inset-y-2 lg:after:content-['']"
                   >
                     <span
                       className={`transition-colors ${

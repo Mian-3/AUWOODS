@@ -74,7 +74,7 @@ export default async function CollectionPage({ params }) {
                   <Link
                     href={`/collections/${c.slug}`}
                     aria-current={active ? "page" : undefined}
-                    className={`block rounded-full border px-5 py-2 text-[13px] font-medium transition-colors duration-300 md:text-[14px] ${
+                    className={`block rounded-full border px-5 py-2.5 text-[13px] font-medium transition-colors duration-300 md:text-[14px] ${
                       active
                         ? "border-[var(--wood)] bg-[var(--wood)] text-white"
                         : "border-black/15 hover:border-[var(--wood)]"

@@ -227,7 +227,7 @@ export default function ShopMenu() {
                   data-panel-item
                   className="grid grid-cols-[7rem_1fr] md:grid-cols-[9.3rem_1fr]"
                 >
-                  <h3 className="py-[5px] text-[15px] font-medium uppercase leading-[22px] md:text-[16px]">
+                  <h3 className="py-2 text-[15px] font-medium uppercase leading-[22px] md:py-[5px] md:text-[16px]">
                     {section.title}
                   </h3>
 
@@ -239,7 +239,7 @@ export default function ShopMenu() {
                             <Link
                               href={item.href}
                               onClick={close}
-                              className={`panel-link block py-[5px] text-[15px] leading-[22px] md:text-[16px] ${
+                              className={`panel-link block py-2 text-[15px] leading-[22px] md:py-[5px] md:text-[16px] ${
                                 section.emphasizeFirst && ci === 0 && ii === 0
                                   ? "font-medium"
                                   : ""
@@ -276,7 +276,7 @@ export default function ShopMenu() {
         {/* Pinned footer: contact + nav */}
         <div className="shrink-0 border-t border-black/10 bg-white px-5 pb-6 pt-3 md:px-10 md:pb-7">
           <ContactInfo
-            className="flex flex-wrap gap-x-7"
+            className="flex flex-wrap gap-x-7 [@media(max-height:520px)]:hidden"
             linkClassName="py-1.5 text-[14px] md:text-[15px]"
           />
           <nav
@@ -293,7 +293,7 @@ export default function ShopMenu() {
                       new CustomEvent("toggle-panel", { detail: link.menu })
                     )
                   }
-                  className={`border-b pb-0.5 transition-opacity hover:opacity-60 ${
+                  className={`border-b py-1.5 transition-opacity hover:opacity-60 ${
                     link.menu === key
                       ? "border-foreground"
                       : "border-transparent"
@@ -306,7 +306,7 @@ export default function ShopMenu() {
                   key={link.label}
                   href={link.href}
                   onClick={close}
-                  className="border-b border-transparent pb-0.5 transition-opacity hover:opacity-60"
+                  className="border-b border-transparent py-1.5 transition-opacity hover:opacity-60"
                 >
                   {link.label}
                 </Link>

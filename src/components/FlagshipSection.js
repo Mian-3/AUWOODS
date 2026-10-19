@@ -24,7 +24,7 @@ export default function FlagshipSection() {
     const mm = gsap.matchMedia();
 
     mm.add(
-      "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+      "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
       () => {
         const distance = () =>
           Math.max(
@@ -60,29 +60,29 @@ export default function FlagshipSection() {
     <section
       ref={root}
       aria-label="Flagships"
-      className="grid grid-cols-1 md:h-[100svh] md:min-h-[560px] md:grid-cols-2"
+      className="grid grid-cols-1 lg:h-[100svh] lg:min-h-[560px] lg:grid-cols-2"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200 md:aspect-auto">
+      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200 lg:aspect-auto">
         <Image
           src={images.services.flagships}
           alt="AU WOODS flagship store"
           fill
-          sizes="(min-width: 768px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 50vw, 100vw"
           className="object-cover"
         />
       </div>
 
-      <div ref={column} className="px-5 py-8 md:px-[30px] md:py-0">
-        <div ref={text} className="md:pt-[8vh]">
-          <h2 className="text-[18px] font-light text-neutral-600 md:text-[22px]">
+      <div ref={column} className="px-5 py-8 md:px-8 lg:px-[30px] lg:py-0">
+        <div ref={text} className="lg:pt-[8vh]">
+          <h2 className="text-[18px] font-light text-neutral-600 lg:text-[22px]">
             {flagships.title}
           </h2>
-          <p className="mt-5 max-w-[26rem] text-[15px] leading-snug md:text-[16px]">
+          <p className="mt-5 max-w-[26rem] text-[15px] leading-snug lg:text-[16px]">
             {flagships.body}
           </p>
           <Link
             href={flagships.cta.href}
-            className="mt-6 inline-block text-[15px] font-medium transition-opacity hover:opacity-60 md:text-[16px]"
+            className="mt-4 inline-block py-2 text-[15px] font-medium transition-opacity hover:opacity-60 lg:relative lg:mt-6 lg:py-0 lg:text-[16px] lg:after:absolute lg:after:-inset-x-1 lg:after:-inset-y-2 lg:after:content-['']"
           >
             {flagships.cta.label}
           </Link>

@@ -41,7 +41,7 @@ export default function CollectionGrid({ products }) {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="cursor-pointer bg-transparent py-1 font-medium outline-none"
+            className="min-h-11 cursor-pointer bg-transparent py-1 text-[16px] font-medium outline-none md:text-[14px]"
           >
             {SORTS.map((s) => (
               <option key={s.value} value={s.value}>

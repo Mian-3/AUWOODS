@@ -61,10 +61,10 @@ export default function Header() {
         style={{ visibility: "hidden" }}
         className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white"
       >
-        <div className="grid h-16 grid-cols-3 items-center px-5 md:px-6">
+        <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center px-5 md:px-6">
           <nav
             aria-label="Primary"
-            className="hidden gap-9 text-[17px] font-medium leading-none md:flex"
+            className="hidden gap-7 whitespace-nowrap text-[17px] font-medium leading-none min-[1440px]:gap-9 xl:flex"
           >
             {navLinks.map((link) => (
               <NavItem
@@ -77,7 +77,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
-            className="w-fit py-3 text-left text-[17px] font-medium md:hidden"
+            className="-ml-2 min-h-11 w-fit px-2 text-left text-[17px] font-medium xl:hidden"
           >
             Menu
           </button>
@@ -88,14 +88,14 @@ export default function Header() {
             className="flex items-center gap-2.5 justify-self-center"
           >
            <Logo className="h-10 md:h-9" />
-<span className="hidden font-serif text-3xl font-normal tracking-tight md:inline">
-  AU WOODS
-</span>
+            <span className="hidden font-serif text-3xl font-normal tracking-tight md:inline">
+              AU WOODS
+            </span>
           </Link>
 
           <Link
             href="#"
-            className="justify-self-end py-3 text-[17px] font-medium"
+            className="-mr-2 flex min-h-11 items-center justify-self-end px-2 text-[17px] font-medium"
           >
             Cart
           </Link>
@@ -104,17 +104,17 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-[60] overflow-y-auto bg-white transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-[60] overflow-y-auto bg-white transition-opacity duration-300 xl:hidden ${
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         aria-hidden={!menuOpen}
       >
         <div className="flex min-h-full flex-col px-5">
-          <div className="grid h-16 shrink-0 grid-cols-3 items-center text-[17px] font-medium">
+          <div className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center text-[17px] font-medium">
             <button
               type="button"
               onClick={() => setMenuOpen(false)}
-              className="flex w-fit items-center gap-2 py-3"
+              className="-ml-2 flex min-h-11 w-fit items-center gap-2 px-2"
             >
               <X size={16} /> Close
             </button>
@@ -126,7 +126,7 @@ export default function Header() {
             >
               <Logo className="h-9" />
             </Link>
-            <Link href="#" className="justify-self-end py-3">
+            <Link href="#" className="-mr-2 flex min-h-11 items-center justify-self-end px-2">
               Cart
             </Link>
           </div>

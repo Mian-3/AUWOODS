@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 
+// Invisible padding: touch par bada tap area, layout me koi farq nahi
+const HIT = "relative after:absolute after:-inset-x-2 after:-inset-y-3 after:content-['']";
+
 export default function NavItem({ link, className = "", onNavigate }) {
   if (link.menu) {
     return (
@@ -14,7 +17,7 @@ export default function NavItem({ link, className = "", onNavigate }) {
             new CustomEvent("toggle-panel", { detail: link.menu })
           );
         }}
-        className={className}
+        className={`${HIT} ${className}`}
       >
         {link.label}
       </button>
@@ -22,7 +25,11 @@ export default function NavItem({ link, className = "", onNavigate }) {
   }
 
   return (
-    <Link href={link.href} onClick={onNavigate} className={className}>
+    <Link
+      href={link.href}
+      onClick={onNavigate}
+      className={`${HIT} ${className}`}
+    >
       {link.label}
     </Link>
   );

@@ -42,7 +42,7 @@ export default function ProductCard({ item, variant = "masonry" }) {
           />
         </Link>
 
-        <span className="absolute left-2 top-2 rounded-full bg-[var(--wood)] px-2 py-[5px] text-[10px] font-medium leading-none text-white md:left-2.5 md:top-2.5 md:px-2.5 md:py-1 md:text-[11px]">
+        <span className="absolute left-2 top-2 rounded-full bg-[var(--wood)] px-2 py-[5px] text-[11px] font-medium leading-none text-white md:left-2.5 md:top-2.5 md:px-2.5 md:py-1 md:text-[11px]">
           -{percent}%
         </span>
 

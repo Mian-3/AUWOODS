@@ -29,7 +29,7 @@ export default function ServiceSlider() {
     const mm = gsap.matchMedia();
 
     mm.add(
-      "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+      "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
       () => {
         const wraps = gsap.utils.toArray(
           rootEl.querySelectorAll("[data-text-wrap]")
@@ -110,29 +110,29 @@ export default function ServiceSlider() {
             key={s.id}
             data-slide={i}
             aria-hidden={!isActive}
-            className={`col-start-1 row-start-1 grid grid-cols-1 transition-opacity duration-700 md:h-[100svh] md:min-h-[600px] md:grid-cols-[30fr_70fr] ${
+            className={`col-start-1 row-start-1 grid grid-cols-1 transition-opacity duration-700 lg:h-[100svh] lg:min-h-[600px] lg:grid-cols-[30fr_70fr] ${
               isActive ? "opacity-100" : "pointer-events-none opacity-0"
             }`}
           >
             {/* Text + pager */}
-            <div className="relative order-2 flex flex-col justify-between px-5 py-8 md:order-1 md:px-[30px] md:py-10">
-              <div data-text-wrap className="md:pt-[4vh]">
+            <div className="relative order-2 flex flex-col justify-between px-5 py-8 md:px-8 lg:order-1 lg:px-[30px] lg:py-10">
+              <div data-text-wrap className="lg:pt-[4vh]">
                 <h2
                   data-text
-                  className="text-[18px] font-light text-neutral-600 md:text-[22px]"
+                  className="text-[18px] font-light text-neutral-600 lg:text-[22px]"
                 >
                   {s.title}
                 </h2>
                 <p
                   data-text
-                  className="mt-5 max-w-[30rem] text-[15px] leading-snug md:text-[16px]"
+                  className="mt-5 max-w-[30rem] text-[15px] leading-snug lg:text-[16px]"
                 >
                   {s.body}
                 </p>
                 <Link
                   data-text
                   href={s.cta.href}
-                  className="mt-6 inline-block text-[15px] font-medium transition-opacity hover:opacity-60 md:text-[16px]"
+                  className="mt-4 inline-block py-2 text-[15px] font-medium transition-opacity hover:opacity-60 lg:relative lg:mt-6 lg:py-0 lg:text-[16px] lg:after:absolute lg:after:-inset-x-1 lg:after:-inset-y-2 lg:after:content-['']"
                 >
                   {s.cta.label}
                 </Link>
@@ -142,7 +142,7 @@ export default function ServiceSlider() {
                 data-pager
                 role="tablist"
                 aria-label="Services pager"
-                className="mt-10 flex gap-6 text-[15px] md:mt-0 md:text-[16px]"
+                className="mt-8 flex gap-2 text-[15px] lg:mt-0 lg:gap-6 lg:text-[16px]"
               >
                 {services.map((p, n) => (
                   <button
@@ -151,7 +151,7 @@ export default function ServiceSlider() {
                     role="tab"
                     aria-selected={n === active}
                     onClick={() => setActive(n)}
-                    className={`border-b pb-0.5 transition-colors ${
+                    className={`min-h-11 min-w-11 border-b-2 px-2 transition-colors lg:relative lg:min-h-0 lg:min-w-0 lg:border-b lg:px-0 lg:pb-0.5 lg:after:absolute lg:after:-inset-2 lg:after:content-[''] ${
                       n === active
                         ? "border-foreground font-medium text-foreground"
                         : "border-transparent text-neutral-500 hover:text-foreground"
@@ -164,13 +164,13 @@ export default function ServiceSlider() {
             </div>
 
             {/* Image */}
-            <div className="relative order-1 aspect-[4/3] overflow-hidden bg-neutral-200 md:order-2 md:aspect-auto">
+            <div className="relative order-1 aspect-[4/3] overflow-hidden bg-neutral-200 lg:order-2 lg:aspect-auto">
               <div data-img className="absolute inset-0">
                 <Image
                   src={slideImages[i]}
                   alt={s.title}
                   fill
-                  sizes="(min-width: 768px) 70vw, 100vw"
+                  sizes="(min-width: 1024px) 70vw, 100vw"
                   className="object-cover"
                 />
               </div>

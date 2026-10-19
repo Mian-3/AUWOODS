@@ -4,7 +4,7 @@ import { introContent } from "@/data/content";
 export default function IntroSection() {
   return (
     <section className="pb-20 pt-10 md:pb-28 md:pt-12">
-      <div className="grid gap-6 md:grid-cols-[30fr_70fr] md:gap-0">
+      <div className="grid gap-6 md:grid-cols-[38fr_62fr] md:gap-0 lg:grid-cols-[30fr_70fr]">
         <h2
           data-reveal
           className="px-5 text-[18px] font-light text-neutral-600 md:px-[30px] md:text-[22px]"
@@ -22,7 +22,7 @@ export default function IntroSection() {
           <Link
             data-reveal
             href={introContent.cta.href}
-            className="link-line mt-7 inline-block pb-0.5 text-[15px] font-medium md:text-[16px]"
+            className="link-line mt-5 inline-block py-2 md:mt-7 text-[15px] font-medium md:text-[16px]"
           >
             {introContent.cta.label}
           </Link>

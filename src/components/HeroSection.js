@@ -66,18 +66,18 @@ export default function HeroSection() {
       <div className="absolute inset-x-0 top-0 flex flex-col items-center px-5 pt-10 text-center md:flex-row md:items-start md:justify-between md:px-6 md:pt-5 md:text-left">
         <h1
           data-hero-fade
-          className="flex items-center gap-3 font-serif text-5xl font-normal tracking-tight [text-shadow:0_1px_16px_rgba(0,0,0,0.35)] md:gap-4 md:text-6xl"
+          className="flex items-center gap-3 font-serif text-5xl font-normal tracking-tight [text-shadow:0_1px_16px_rgba(0,0,0,0.35)] md:gap-3 md:text-5xl lg:gap-4 lg:text-6xl"
         >
           <Logo
             variant="white"
             priority
-            className="h-10 drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)] md:h-14"
+            className="h-10 drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)] md:h-12 lg:h-14"
           />
           AU WOODS
         </h1>
         <p
           data-hero-fade
-          className="mt-3 text-[17px] font-semibold leading-snug [text-shadow:0_1px_14px_rgba(0,0,0,0.7)] md:mt-3 md:text-right md:text-[20px]"
+          className="mt-3 text-[17px] font-semibold leading-snug [text-shadow:0_1px_14px_rgba(0,0,0,0.7)] md:mt-3 md:text-right md:text-[16px] lg:text-[20px]"
         >
           {heroContent.introLines.map((line) => (
             <span key={line} className="block">
@@ -91,7 +91,7 @@ export default function HeroSection() {
       <nav
         data-hero-fade
         aria-label="Hero"
-        className="absolute bottom-7 left-6 z-10 hidden gap-9 text-[17px] font-medium leading-none [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:flex"
+        className="absolute bottom-7 left-6 z-10 hidden gap-7 text-[17px] font-medium leading-none [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] min-[1440px]:gap-9 md:flex"
       >
         {navLinks.map((link) => (
           <NavItem
@@ -105,7 +105,7 @@ export default function HeroSection() {
         data-hero-fade
         type="button"
         onClick={() => window.dispatchEvent(new Event("open-menu"))}
-        className="absolute bottom-4 left-5 py-3 text-[17px] font-medium [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:hidden"
+        className="absolute bottom-3 left-3 min-h-11 px-2 text-[17px] font-medium [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:hidden"
       >
         Menu
       </button>
