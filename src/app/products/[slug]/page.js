@@ -5,8 +5,13 @@ import Footer from "@/components/Footer";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import ShopMenu from "@/components/ShopMenu";
 import ProductGallery from "@/components/product/ProductGallery";
+import ProductDetails from "@/components/product/ProductDetails";
 import ProductInfo from "@/components/product/ProductInfo";
 import DimensionsSection from "@/components/product/DimensionsSection";
+import HighlightsBand from "@/components/product/HighlightsBand";
+import StorySection from "@/components/product/StorySection";
+import FinishExplorer from "@/components/product/FinishExplorer";
+import ProductFaq from "@/components/product/ProductFaq";
 import CraftSection from "@/components/product/CraftSection";
 import RelatedProducts from "@/components/product/RelatedProducts";
 import {
@@ -48,11 +53,6 @@ export default async function ProductPage({ params }) {
     description: product.story,
     image: product.images,
     brand: { "@type": "Brand", name: "AU WOODS" },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: product.rating,
-      reviewCount: product.reviews,
-    },
     offers: {
       "@type": "Offer",
       priceCurrency: "PKR",
@@ -82,17 +82,26 @@ export default async function ProductPage({ params }) {
               <span className="text-black">{product.name}</span>
             </nav>
 
-            <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16 xl:gap-24">
-              <ProductGallery images={product.images} name={product.name} />
-              <div className="lg:sticky lg:top-24 lg:self-start">
+            <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-x-16 xl:gap-x-24">
+              <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+                <ProductGallery images={product.images} name={product.name} />
+              </div>
+              <div className="min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:sticky lg:top-24 lg:self-start">
                 <ProductInfo product={product} />
+              </div>
+              <div className="min-w-0 lg:col-start-1 lg:row-start-2">
+                <ProductDetails product={product} />
               </div>
             </div>
           </div>
         </section>
 
+        <HighlightsBand product={product} />
+        <StorySection product={product} />
+        <FinishExplorer product={product} />
         <DimensionsSection product={product} />
         <CraftSection />
+        <ProductFaq />
         <RelatedProducts
           title="You may also like"
           items={related}

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import FitImage from "@/components/FitImage";
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 
 export default function ProductGallery({ images, name }) {
@@ -38,40 +39,23 @@ export default function ProductGallery({ images, name }) {
   }, [lightbox, go]);
 
   return (
-    <div className="lg:grid lg:grid-cols-[88px_1fr] lg:gap-4">
-      {/* Desktop thumbnails */}
-      <ul className="no-scrollbar hidden max-h-[80vh] flex-col gap-3 overflow-y-auto lg:flex">
-        {images.map((src, i) => (
-          <li key={src}>
-            <button
-              type="button"
-              onClick={() => setActive(i)}
-              aria-label={`Show image ${i + 1}`}
-              aria-current={active === i}
-              className={`relative block aspect-[4/5] w-full overflow-hidden rounded bg-[#f3efea] ring-1 transition ${
-                active === i ? "ring-[var(--wood)]" : "ring-transparent opacity-70 hover:opacity-100"
-              }`}
-            >
-              <Image src={src} alt="" fill sizes="88px" className="object-cover" />
-            </button>
-          </li>
-        ))}
-      </ul>
-
+    <div>
       {/* Desktop main image */}
-      <div className="relative hidden aspect-[4/5] overflow-hidden rounded-md bg-[#f3efea] lg:block">
+      <div className="relative hidden aspect-[4/3] overflow-hidden rounded-md bg-[#f1ece6] lg:block">
         {images.map((src, i) => (
-          <Image
+          <div
             key={src}
-            src={src}
-            alt={`${name}, view ${i + 1}`}
-            fill
-            priority={i === 0}
-            sizes="(min-width: 1280px) 620px, 55vw"
-            className={`object-cover transition-opacity duration-500 ${
+            className={`absolute inset-0 transition-opacity duration-500 ${
               active === i ? "opacity-100" : "opacity-0"
             }`}
-          />
+          >
+            <FitImage
+              src={src}
+              alt={`${name}, view ${i + 1}`}
+              priority={i === 0}
+              sizes="(min-width: 1280px) 620px, 55vw"
+            />
+          </div>
         ))}
         <button
           type="button"
@@ -83,6 +67,26 @@ export default function ProductGallery({ images, name }) {
           <Expand size={16} strokeWidth={1.5} />
         </span>
       </div>
+
+      {images.length > 1 && (
+        <ul className="mt-3 hidden grid-cols-4 gap-3 lg:grid">
+          {images.map((src, i) => (
+            <li key={src}>
+              <button
+                type="button"
+                onClick={() => setActive(i)}
+                aria-label={`Show image ${i + 1}`}
+                aria-current={active === i}
+                className={`relative block aspect-[4/3] w-full overflow-hidden rounded bg-[#f1ece6] ring-1 transition ${
+                  active === i ? "ring-[var(--wood)]" : "opacity-70 ring-transparent hover:opacity-100"
+                }`}
+              >
+                <FitImage src={src} sizes="160px" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
 
       {/* Mobile / tablet carousel */}
       <div className="relative lg:hidden">
@@ -97,20 +101,18 @@ export default function ProductGallery({ images, name }) {
               type="button"
               onClick={() => setLightbox(true)}
               aria-label={`Zoom image ${i + 1}`}
-              className="relative aspect-[4/5] w-full shrink-0 snap-center bg-[#f3efea] sm:aspect-[4/3]"
+              className="relative aspect-[4/3] w-full shrink-0 snap-center"
             >
-              <Image
+              <FitImage
                 src={src}
                 alt={`${name}, view ${i + 1}`}
-                fill
                 priority={i === 0}
                 sizes="(min-width: 640px) 90vw, 100vw"
-                className="object-cover"
               />
             </button>
           ))}
         </div>
-        <div className="mt-3 flex justify-center gap-2" aria-hidden>
+        {images.length > 1 && (<div className="mt-3 flex justify-center gap-2" aria-hidden>
           {images.map((_, i) => (
             <span
               key={i}
@@ -119,7 +121,7 @@ export default function ProductGallery({ images, name }) {
               }`}
             />
           ))}
-        </div>
+        </div>)}
       </div>
 
       {lightbox && (

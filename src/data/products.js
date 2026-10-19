@@ -71,21 +71,17 @@ const PREFIXES = [
   "Sapele", "Ember", "Haven", "Solace", "Mosaic", "Atlas", "Nimbus", "Terra",
 ];
 
-const IMAGE_POOL = [
-  ...Object.values(images.bestSellers),
-  ...Object.values(images.collection),
-];
-
-// Har collection ki apni "hero" image, gallery me pehle yehi aati hai
-const COLLECTION_IMAGE = {
-  sofas: images.collection.sofas,
-  beds: images.collection.beds,
-  "dining-tables": images.collection.dining,
-  "side-tables": images.collection.sideTables,
-  "accent-chairs": images.collection.chairs,
-  storage: images.collection.storage,
-  desks: images.collection.desks,
-  accents: images.collection.accents,
+// Har collection ki apni images: bed ke page par sirf bed ki photo aaye.
+// Asli product photos aane par yahan ya har product me badal dena.
+const COLLECTION_IMAGES = {
+  sofas: [images.collection.sofas, images.bestSellers.sofaB],
+  beds: [images.collection.beds],
+  "dining-tables": [images.collection.dining],
+  "side-tables": [images.collection.sideTables, images.bestSellers.coffeeTable],
+  "accent-chairs": [images.collection.chairs],
+  storage: [images.collection.storage],
+  desks: [images.collection.desks],
+  accents: [images.collection.accents],
 };
 
 export const FINISHES = [
@@ -188,9 +184,8 @@ function build({ name, slug, collection, price, oldPrice, image, ratio, seed }) 
   const r = rng(hash(seed));
   const sizes = SIZES[collection] ?? SIZES.accents;
   const gallery = [
-    image,
-    ...shuffle(IMAGE_POOL.filter((x) => x !== image), r).slice(0, 3),
-  ];
+    ...new Set([image, ...(COLLECTION_IMAGES[collection] ?? [])]),
+  ].slice(0, 4);
   const finishes = shuffle(FINISHES, r).slice(0, 3);
   const type = name.split(" ").slice(-1)[0];
   return {
@@ -203,12 +198,10 @@ function build({ name, slug, collection, price, oldPrice, image, ratio, seed }) 
     oldPrice,
     image,
     images: gallery,
-    hoverImage: gallery[1],
+    hoverImage: gallery[1] ?? null,
     ratio: ratio ?? "aspect-[4/5]",
     href: `/products/${slug}`,
     badge: BADGES[Math.floor(r() * BADGES.length)],
-    rating: Math.round((4.5 + r() * 0.5) * 10) / 10,
-    reviews: 12 + Math.floor(r() * 140),
     finishes,
     sizes,
     material: MATERIALS[collection] ?? MATERIALS.accents,
@@ -237,8 +230,7 @@ export function getProducts(slug, count = 16) {
 
   const r = rng(hash(slug));
   const prefixes = shuffle(PREFIXES, r);
-  const own = COLLECTION_IMAGE[slug];
-  const pool = shuffle(IMAGE_POOL.filter((x) => x !== own), r);
+  const pool = COLLECTION_IMAGES[slug] ?? [];
 
   const list = Array.from({ length: count }, (_, i) => {
     const discount = 0.08 + r() * 0.17;
@@ -251,7 +243,7 @@ export function getProducts(slug, count = 16) {
       collection: slug,
       price,
       oldPrice,
-      image: i === 0 && own ? own : pool[i % pool.length],
+      image: pool[i % pool.length],
       seed: `${slug}-${i}`,
     });
   });
@@ -261,7 +253,7 @@ export function getProducts(slug, count = 16) {
 
 // Home page ke Best Sellers: content.js ke fixed items, ab asli product pages ke saath
 const BEST_SELLER_COLLECTION = {
-  sofaA: "sofas", tvTable: "storage", chair: "accent-chairs", sofaB: "sofas",
+  sofaA: "sofas", tvTable: "side-tables", chair: "accent-chairs", sofaB: "sofas",
   coffeeTable: "side-tables", dining: "dining-tables", bed: "beds",
   storage: "storage", accent: "accent-chairs",
 };

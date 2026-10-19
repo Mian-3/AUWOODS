@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Check, Heart, ShoppingBag, Star } from "lucide-react";
+import { Check, Heart, ShoppingBag } from "lucide-react";
+import FitImage from "@/components/FitImage";
 import { addItem } from "@/lib/cart";
 import { discountPercent, formatPrice } from "@/lib/format";
 
@@ -16,7 +16,6 @@ export default function ProductCard({ item, variant = "masonry" }) {
 
   const percent = discountPercent(item.price, item.oldPrice);
   const save = item.oldPrice - item.price;
-  const ratio = item.ratio ?? "aspect-[4/5]";
   const href = item.href ?? `/products/${item.slug}`;
   const defaultSize = item.sizes?.find((s) => s.mult === 1) ?? item.sizes?.[0];
 
@@ -38,24 +37,22 @@ export default function ProductCard({ item, variant = "masonry" }) {
       : "grid grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] md:group-focus-within:grid-rows-[1fr] [@media(hover:none)]:grid-rows-[1fr]";
 
   return (
-    <article className="group break-inside-avoid pb-6 md:pb-8">
-      <div className={`relative w-full overflow-hidden rounded-md bg-[#f3efea] ${ratio}`}>
+    <article className="group flex h-full flex-col pb-6 md:pb-8">
+      <div className="relative aspect-[5/4] w-full overflow-hidden rounded-md bg-[#f1ece6]">
         <Link href={href} aria-label={item.name} className="absolute inset-0">
-          <Image
+          <FitImage
             src={item.image}
             alt={item.name}
-            fill
             sizes="(min-width: 1280px) 300px, (min-width: 768px) 30vw, 46vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            imgClassName="transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
           {item.hoverImage && (
-            <Image
-              src={item.hoverImage}
-              alt=""
-              fill
-              sizes="(min-width: 1280px) 300px, (min-width: 768px) 30vw, 46vw"
-              className="object-cover opacity-0 transition-opacity duration-500 [@media(hover:hover)]:group-hover:opacity-100"
-            />
+            <div className="absolute inset-0 opacity-0 transition-opacity duration-500 [@media(hover:hover)]:group-hover:opacity-100">
+              <FitImage
+                src={item.hoverImage}
+                sizes="(min-width: 1280px) 300px, (min-width: 768px) 30vw, 46vw"
+              />
+            </div>
           )}
         </Link>
 
@@ -89,19 +86,13 @@ export default function ProductCard({ item, variant = "masonry" }) {
         </button>
       </div>
 
-      <div className="pt-3">
+      <div className="flex flex-1 flex-col pt-3">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="line-clamp-2 text-[13px] font-medium leading-snug md:text-[15px]">
+          <h3 className="line-clamp-2 min-h-[2.6em] text-[13px] md:min-h-0 font-medium leading-snug md:text-[15px]">
             <Link href={href} className="hover:opacity-70">
               {item.name}
             </Link>
           </h3>
-          {item.rating && (
-            <span className="mt-0.5 hidden shrink-0 items-center gap-1 text-[12px] text-[var(--muted)] sm:flex">
-              <Star size={12} className="fill-[var(--wood)] text-[var(--wood)]" />
-              {item.rating}
-            </span>
-          )}
         </div>
 
         {item.finishes?.length > 0 && (
@@ -133,7 +124,7 @@ export default function ProductCard({ item, variant = "masonry" }) {
           )}
         </div>
 
-        <div className={actionsWrap}>
+        <div className={`mt-auto ${actionsWrap}`}>
           <div className="overflow-hidden">
             <div className="pt-3">
               <button

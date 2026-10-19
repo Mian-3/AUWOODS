@@ -21,10 +21,10 @@ export default function BestSellers() {
           </h2>
         </div>
 
-        {/* Masonry: CSS columns */}
-      <div className="columns-2 gap-3 md:columns-3 md:gap-6">
+        {/* Barabar size ke cards */}
+        <div className="grid grid-cols-2 gap-x-3 md:grid-cols-3 md:gap-x-6">
           {items.map((item) => (
-            <ProductCard key={item.slug} item={item} />
+            <ProductCard key={item.slug} item={item} variant="grid" />
           ))}
         </div>
 

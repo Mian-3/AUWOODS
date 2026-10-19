@@ -2,40 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Check, MessageCircle, Minus, Plus, ShieldCheck, ShoppingBag, Star, Truck, Hammer } from "lucide-react";
+import { Check, MessageCircle, Minus, Plus, ShieldCheck, ShoppingBag, Truck, Hammer } from "lucide-react";
 import { addItem } from "@/lib/cart";
 import { discountPercent, formatPrice } from "@/lib/format";
 import { productOrderLink } from "@/lib/whatsapp";
-
-function Accordion({ title, children, defaultOpen = false }) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-black/10">
-      <button
-        type="button"
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        className="flex min-h-14 w-full items-center justify-between text-left text-[15px] font-medium"
-      >
-        {title}
-        <Plus
-          size={16}
-          strokeWidth={1.5}
-          className={`transition-transform duration-300 ${open ? "rotate-45" : ""}`}
-        />
-      </button>
-      <div
-        className={`grid transition-[grid-template-rows] duration-300 ease-out ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <div className="pb-5 text-[14px] leading-relaxed text-[#4a4440]">{children}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function ProductInfo({ product }) {
   const [finish, setFinish] = useState(product.finishes[0]);
@@ -91,15 +61,13 @@ export default function ProductInfo({ product }) {
         {product.name}
       </h1>
 
-      <div className="mt-4 flex items-center gap-2 text-[13px]">
-        <span className="flex" aria-hidden>
-          {[0, 1, 2, 3, 4].map((i) => (
-            <Star key={i} size={14} className="fill-[var(--wood)] text-[var(--wood)]" />
-          ))}
-        </span>
-        <span className="font-medium">{product.rating}</span>
-        <span className="text-[var(--muted)]">({product.reviews} reviews)</span>
-      </div>
+      <ul className="mt-4 flex flex-wrap gap-2 text-[12px]">
+        {[product.badge, "Solid wood", "Made to order"].filter(Boolean).map((t) => (
+          <li key={t} className="rounded-full border border-black/15 px-3 py-1.5">
+            {t}
+          </li>
+        ))}
+      </ul>
 
       <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="text-[26px] font-medium">{formatPrice(price)}</span>
@@ -228,31 +196,6 @@ export default function ProductInfo({ product }) {
         </li>
       </ul>
 
-      <div className="mt-2">
-        <Accordion title="Details" defaultOpen>
-          <ul className="list-disc space-y-1.5 pl-5">
-            <li>{product.material}</li>
-            <li>
-              Overall size {size.w} x {size.d} x {size.h} cm (W x D x H)
-            </li>
-            <li>Finish: {finish.name}, hand rubbed and sealed</li>
-            <li>Assembled by our team at your home</li>
-          </ul>
-        </Accordion>
-        <Accordion title="Delivery and installation">
-          Each piece is made to order in our workshop and ready in {product.leadTime}. Our team
-          delivers, unpacks and places it in your room, and takes the packaging away.
-        </Accordion>
-        <Accordion title="Care">
-          Wipe with a soft, dry cloth. Keep away from direct sun and standing water. Re-oil the
-          wood once a year to keep the grain rich.
-        </Accordion>
-        <Accordion title="Warranty and returns">
-          A 5 year warranty covers the frame and joinery. If something is not right, call us and we
-          will make it right.
-        </Accordion>
-      </div>
-
       {/* Mobile sticky buy bar */}
       <div
         aria-hidden={!barVisible}
@@ -262,7 +205,7 @@ export default function ProductInfo({ product }) {
         }`}
       >
         <div className="relative h-12 w-10 shrink-0 overflow-hidden rounded bg-[#f3efea]">
-          <Image src={product.image} alt="" fill sizes="40px" className="object-cover" />
+          <Image src={product.image} alt="" fill sizes="40px" className="object-contain" />
         </div>
         <div className="min-w-0 flex-1">
           <p className="truncate text-[13px] font-medium">{product.name}</p>
