@@ -1,9 +1,9 @@
 export const navLinks = [
-  { label: "Shop", href: "#", menu: "shop" },
-  { label: "Interior Design", href: "#" },
-  { label: "Services", href: "#", menu: "services" },
-  { label: "Swatches", href: "#" },
-  { label: "Stores", href: "#", menu: "stores" },
+  { label: "Shop", href: "/collections/all", menu: "shop" },
+  { label: "Interior Design", href: "/interior-design" },
+  { label: "Services", href: "/interior-design", menu: "services" },
+  { label: "Swatches", href: "/swatches" },
+  { label: "Stores", href: "/stores", menu: "stores" },
 ];
 
 export const heroContent = {
@@ -13,7 +13,7 @@ export const heroContent = {
 export const introContent = {
   label: "New from Fall/Winter 2026",
   body: "This season brings expressive materiality to architectural forms. The Brasa Collection pairs richly figured sapele with fine upholstery, while the Brio Coffee Tables highlight the natural movement of Bronze Fantasy stone.",
-  cta: { label: "Shop Now", href: "#" },
+  cta: { label: "Shop Now", href: "/collections/all" },
 };
 
 export const services = [
@@ -21,76 +21,114 @@ export const services = [
     id: "01",
     title: "AU WOODS Interiors",
     body: "Create exquisite spaces with a dedicated interior designer, here to guide you through projects of all scopes and sizes.",
-    cta: { label: "Schedule a Consultation", href: "#" },
+    cta: { label: "Schedule a Consultation", href: "/interior-design" },
   },
   {
     id: "02",
     title: "Swatches",
     body: "Experience the fabrics, leathers, and finishes of your choice in your space.",
-    cta: { label: "Order Swatches", href: "#" },
+    cta: { label: "Order Swatches", href: "/swatches" },
   },
   {
     id: "03",
     title: "For Design Professionals",
     body: "Interior designers and architects enjoy services tailored to their needs.",
-    cta: { label: "Apply", href: "#" },
+    cta: { label: "Apply", href: "/trade" },
   },
 ];
 
 export const flagships = {
   title: "Flagships",
   body: "Experience our designs, materials, and philosophy at AU WOODS flagships in New York and Miami.",
-  cta: { label: "Visit", href: "#" },
+  cta: { label: "Visit", href: "/stores" },
 };
 
 export const edits = [
-  { id: "01", title: "The Bedroom Collection", href: "#", imageKey: "bedroom" },
-  { id: "02", title: "The Living Room Collection", href: "#", imageKey: "living" },
-  { id: "03", title: "The Dining Collection", href: "#", imageKey: "dining" },
-  { id: "04", title: "New Arrivals", href: "#", imageKey: "arrivals" },
+  { id: "01", title: "The Bedroom Collection", href: "/collections/beds", imageKey: "bedroom" },
+  { id: "02", title: "The Living Room Collection", href: "/collections/sofas", imageKey: "living" },
+  { id: "03", title: "The Dining Collection", href: "/collections/dining-tables", imageKey: "dining" },
+  { id: "04", title: "New Arrivals", href: "/collections/all", imageKey: "arrivals" },
 ];
 
 export const footerColumns = [
   {
     title: "Brand",
     links: [
-      { label: "About", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Instagram", href: "#" },
-      { label: "Pinterest", href: "#" },
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Instagram", href: "/contact" },
+      { label: "Pinterest", href: "/contact" },
     ],
   },
   {
     title: "Services",
     links: [
-      { label: "Trade & Contract", href: "#" },
-      { label: "AU WOODS Interiors", href: "#" },
-      { label: "Care Services & Resources", href: "#" },
+      { label: "Trade & Contract", href: "/trade" },
+      { label: "AU WOODS Interiors", href: "/interior-design" },
+      { label: "Care Services & Resources", href: "/care" },
     ],
   },
   {
     title: "Support",
     links: [
-      { label: "Contact", href: "#" },
-      { label: "FAQ", href: "#" },
-      { label: "Product & Material Care", href: "#" },
-      { label: "Catalog Preferences", href: "#" },
-      { label: "Sitemap", href: "#" },
+      { label: "Contact", href: "/contact" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Product & Material Care", href: "/care" },
+      { label: "Catalog Preferences", href: "/contact" },
+      { label: "Sitemap", href: "/sitemap" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Notice at Collection", href: "#" },
-      { label: "Do Not Sell My Info", href: "#" },
-      { label: "Terms & Conditions", href: "#" },
-      { label: "Accessibility Statement", href: "#" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Notice at Collection", href: "/privacy" },
+      { label: "Do Not Sell My Info", href: "/privacy" },
+      { label: "Terms & Conditions", href: "/terms" },
+      { label: "Accessibility Statement", href: "/accessibility" },
     ],
   },
 ];
 
-const l = (label) => ({ label, href: "#" });
+// Menu panel ke har label ka asli page
+const MENU_LINKS = {
+  "Fall/Winter 2026": "/collections/all",
+  "The Collectible Series": "/collections/all",
+  "Ready to Ship": "/collections/all",
+  Sofas: "/collections/sofas",
+  Sectionals: "/collections/sofas",
+  "Modular Seating": "/collections/sofas",
+  "Accent Chairs": "/collections/accent-chairs",
+  Daybeds: "/collections/beds",
+  Benches: "/collections/accent-chairs",
+  "Ottomans & Stools": "/collections/accent-chairs",
+  "Sleeper Sofas": "/collections/sofas",
+  "Dining Chairs": "/collections/accent-chairs",
+  "Bar & Counter Stools": "/collections/accent-chairs",
+  "Dining Tables": "/collections/dining-tables",
+  "Console & Entry Tables": "/collections/storage",
+  "Coffee Tables": "/collections/side-tables",
+  "Side Tables": "/collections/side-tables",
+  Plinths: "/collections/side-tables",
+  Desks: "/collections/desks",
+  Beds: "/collections/beds",
+  "Mirrors & Screens": "/collections/accents",
+  "Sideboards & Consoles": "/collections/storage",
+  Shelves: "/collections/accents",
+  "Dressers & Armoires": "/collections/storage",
+  Nightstands: "/collections/beds",
+  "The Living Collection": "/collections/sofas",
+  "The Dining Collection": "/collections/dining-tables",
+  "The Bedroom Collection": "/collections/beds",
+  "AU WOODS Interiors": "/interior-design",
+  "Trade & Contract": "/trade",
+  "Care Services & Resources": "/care",
+  Contact: "/contact",
+  "New York Flagship": "/stores",
+  "Miami Flagship": "/stores",
+};
+
+const l = (label) => ({ label, href: MENU_LINKS[label] ?? "/collections/all" });
 
 export const shopMenu = [
   {
@@ -186,4 +224,36 @@ export const siteInfo = {
   email: "infoauwoods@gmail.com",
   phone: "0309 4666939",
   phoneHref: "tel:+923094666939",
+  // Instagram profile ka poora link yahan likho, jaise "https://instagram.com/yourhandle"
+  instagram: "",
+};
+export const faqContent = {
+  title: "Questions, answered",
+  intro: "Everything people ask us before ordering their first AU WOODS piece.",
+  items: [
+    {
+      q: "What is AU WOODS furniture made of?",
+      a: "Our frames are solid wood, kiln dried and joined by hand. Upholstered pieces pair the wood frame with fine fabrics and high resilience foam. We do not use particle board.",
+    },
+    {
+      q: "Is everything made to order?",
+      a: "Yes. Each piece is built in our workshop after you order it, in the finish and size you choose. The estimated time is shown on every product page.",
+    },
+    {
+      q: "How do I place an order?",
+      a: "Pick your finish and size, add the piece to your cart and press Order on WhatsApp. Your selection reaches us as a ready message, and our team confirms price, timing and delivery with you.",
+    },
+    {
+      q: "Can I see the wood or fabric before I decide?",
+      a: "Yes. Order swatches and see the finishes in your own light and space. You can also arrange a visit through our Stores page.",
+    },
+    {
+      q: "Do you deliver and assemble?",
+      a: "Our team delivers, assembles and places the furniture in your room, then takes the packaging away.",
+    },
+    {
+      q: "What if something is not right?",
+      a: "A 5 year warranty covers the frame and joinery. If anything is not right, contact us and we will make it right.",
+    },
+  ],
 };
