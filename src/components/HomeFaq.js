@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { faqContent } from "@/data/content";
 import { enquiryLink } from "@/lib/whatsapp";
 
@@ -42,7 +43,7 @@ export default function HomeFaq() {
             rel="noopener noreferrer"
             className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full border border-[#1f8f4e] px-6 text-[14px] font-medium text-[#1f6f40] transition-colors hover:bg-[#1f8f4e] hover:text-white"
           >
-            <MessageCircle size={16} strokeWidth={1.5} /> Ask us on WhatsApp
+            <WhatsAppIcon size={18} /> Ask us on WhatsApp
           </a>
         </div>
 

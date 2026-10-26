@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Check, MessageCircle, Minus, Plus, ShieldCheck, ShoppingBag, Truck, Hammer } from "lucide-react";
+import { Check, Minus, Plus, ShieldCheck, ShoppingBag, Truck, Hammer } from "lucide-react";
 import { addItem } from "@/lib/cart";
 import { discountPercent, formatPrice } from "@/lib/format";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { productOrderLink } from "@/lib/whatsapp";
 
 export default function ProductInfo({ product }) {
@@ -180,7 +181,7 @@ export default function ProductInfo({ product }) {
         rel="noopener noreferrer"
         className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#1f8f4e] text-[14px] font-medium text-[#1f6f40] transition-colors hover:bg-[#1f8f4e] hover:text-white"
       >
-        <MessageCircle size={16} strokeWidth={1.5} /> Order on WhatsApp
+        <WhatsAppIcon size={18} /> Order on WhatsApp
       </a>
 
       {/* Trust row */}

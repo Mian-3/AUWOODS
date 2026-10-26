@@ -6,15 +6,15 @@ const rows = [
   {
     layout: "md:grid-cols-[39fr_59fr]",
     items: [
-      { title: "Coffee Tables", src: images.categories.tables },
-      { title: "Sofas", src: images.categories.sofas },
+      { title: "Coffee Tables", href: "/collections/side-tables", src: images.categories.tables },
+      { title: "Sofas", href: "/collections/sofas", src: images.categories.sofas },
     ],
   },
   {
     layout: "md:grid-cols-[59fr_39fr]",
     items: [
-      { title: "Beds", src: images.categories.beds },
-      { title: "Side Tables", src: images.categories.sideTables },
+      { title: "Beds", href: "/collections/beds", src: images.categories.beds },
+      { title: "Side Tables", href: "/collections/side-tables", src: images.categories.sideTables },
     ],
   },
 ];
@@ -29,7 +29,7 @@ export default function CategoryGrid() {
             className={`grid grid-cols-1 gap-10 md:gap-[2%] ${row.layout}`}
           >
             {row.items.map((item) => (
-              <Link key={item.title} href="#" className="group block">
+              <Link key={item.title} href={item.href} className="group block">
                 {/* Same height for both images in a row */}
                 <div
                   data-reveal-img

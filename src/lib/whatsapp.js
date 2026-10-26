@@ -56,3 +56,11 @@ export function cartOrderLink(items, subtotal) {
   ].join("\n");
   return link(text);
 }
+
+// Form / enquiry ka message: { "Name": "Ali", ... } fields se
+export function enquiryLink(topic, fields) {
+  const lines = Object.entries(fields)
+    .filter(([, v]) => v && String(v).trim())
+    .map(([k, v]) => `${k}: ${String(v).trim()}`);
+  return link([`Hello AU WOODS, ${topic}.`, "", ...lines].join("\n"));
+}

@@ -10,6 +10,7 @@ import NavItem from "@/components/NavItem";
 import Logo from "@/components/Logo";
 import ContactInfo from "@/components/ContactInfo";
 import CartDrawer from "@/components/CartDrawer";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { openCart, useCart } from "@/lib/cart";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -170,6 +171,7 @@ export default function Header() {
         </div>
       </div>
       <CartDrawer />
+      <WhatsAppFloat />
     </>
   );
 }

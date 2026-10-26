@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { images } from "@/data/images";
@@ -103,6 +104,11 @@ export default function EditsSection() {
               />
             </div>
           ))}
+          <Link
+            href={edits[active].href}
+            aria-label={`Shop ${edits[active].title}`}
+            className="absolute inset-0 z-10"
+          />
         </div>
 
         {/* Label + list */}
@@ -152,6 +158,13 @@ export default function EditsSection() {
               );
             })}
           </ul>
+
+          <Link
+            href={edits[active].href}
+            className="mt-6 inline-block py-2 text-[15px] font-medium transition-opacity hover:opacity-60 lg:mt-12 lg:py-0 lg:text-[16px]"
+          >
+            Shop {edits[active].title}
+          </Link>
         </div>
       </div>
     </section>
